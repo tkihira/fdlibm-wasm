@@ -1,6 +1,6 @@
 # fdlibm for wasm
 
-Porting fdlibm to wasm
+Porting fdlibm to WebAssembly
 
 ## How to use
 

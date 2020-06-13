@@ -1,0 +1,25 @@
+<html>
+    <head>
+        <title>casual test for libm.wasm</title>
+    </head>
+    <script>
+onload = async () => {
+    const response = await fetch('./libm.wasm');
+    const arrayBuffer = await response.arrayBuffer();
+    const result = await WebAssembly.instantiate(arrayBuffer);
+    const exports = result.instance.exports;
+
+    for(let i = 0; i < 100; i++) {
+        const input = Math.random() * 100 - 50;
+        const mathSin = Math.sin(input);
+        const libmSin = exports.sin(input);
+        const diff = mathSin - libmSin;
+        const output = `diff:${diff} Math.sin:${mathSin} libm.sin:${libmSin} input:${input}`;
+        console.log(output);
+        document.body.innerHTML += output + '<br>';
+    }
+};
+    </script>
+    <body>
+    </body>
+</html>
